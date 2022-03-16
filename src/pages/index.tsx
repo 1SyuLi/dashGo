@@ -1,12 +1,14 @@
 import Head from 'next/head'
-import { Flex, Input, Button, Stack, FormLabel, FormControl } from '@chakra-ui/react';
+import { Flex, Button, Stack } from '@chakra-ui/react';
 
 
-export default function Home() {
+import { Input } from '../components/Form/Input';
+
+
+export default function SignIn() {
 
 
     return (
-
         <>
             <Head>
                 <title>Home | dashGo</title>
@@ -15,37 +17,8 @@ export default function Home() {
             <Flex w="100vw" h="100vh" align="center" justify="center">
                 <Flex as="form" w="100%" maxW="360px" bg="gray.800" p="8" borderRadius={9} flexDir="column">
                     <Stack mt={4}>
-                        <FormControl>
-                            <FormLabel htmlFor='email'>E-mail</FormLabel>
-                            <Input
-                                id='email'
-                                name="email"
-                                type="email"
-                                focusBorderColor="pink.500"
-                                bgColor="gray.900"
-                                variant="filled"
-                                _hover={{
-                                    bgColor: 'gray.900'
-                                }}
-                                size="lg"
-                            />
-                        </FormControl>
-
-                        <FormControl>
-                            <FormLabel htmlFor='password'>Senha</FormLabel>
-                            <Input
-                                id='password'
-                                name="password"
-                                type="password"
-                                focusBorderColor="pink.500"
-                                bgColor="gray.900"
-                                variant="filled"
-                                _hover={{
-                                    bgColor: 'gray.900'
-                                }}
-                                size="lg"
-                            />
-                        </FormControl>
+                        <Input name="email" type="email" label='E-mail' />
+                        <Input name="password" type="password" label='Senha' />
                     </Stack>
 
                     <Button type='submit' mt={6} colorScheme='pink' size="lg" >Entrar</Button>
