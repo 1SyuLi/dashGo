@@ -11,7 +11,7 @@ export default function Home() {
             <Head>
                 <title>Home | dashGo</title>
             </Head>
-            <h1>😎</h1>
+            <h1>Hello World 😎</h1>
         </>
     )
 }
