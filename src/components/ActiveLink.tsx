@@ -9,25 +9,25 @@ interface ActiveLinkProps extends LinkProps {
 }
 
 export function ActiveLink({ children, shouldMatchExactHref = false, ...rest }: ActiveLinkProps) {
-    const { asPath } = useRouter();
-    let isActive = false;
+	const { asPath } = useRouter();
+	let isActive = false;
 
-    if (shouldMatchExactHref && (asPath === rest.href || asPath === rest.as)) {
-        isActive = true;
-    }
+	if (shouldMatchExactHref && (asPath === rest.href || asPath === rest.as)) {
+		isActive = true;
+	}
 
-    if (!shouldMatchExactHref &&
+	if (!shouldMatchExactHref &&
         (asPath.startsWith(String(rest.href)) ||
             asPath.startsWith(String(rest.as)))) {
-        isActive = true;
-    }
+		isActive = true;
+	}
 
 
-    return (
-        <Link {...rest}>
-            {cloneElement(children, {
-                color: isActive ? 'pink.400' : 'gray.50',
-            })}
-        </Link>
-    )
-};
+	return (
+		<Link {...rest}>
+			{cloneElement(children, {
+				color: isActive ? "pink.400" : "gray.50",
+			})}
+		</Link>
+	);
+}

@@ -1,5 +1,5 @@
-import { createServer, Factory, Model, Response } from 'miragejs';
-import faker from 'faker';
+import { ActiveModelSerializer, createServer, Factory, Model, Response } from "miragejs";
+import faker from "faker";
 
 type User = {
     name: string;
@@ -8,56 +8,60 @@ type User = {
 }
 
 export function makeServer() {
-    const server = createServer({
-        models: {
-            user: Model.extend<Partial<User>>({})
-        },
+	const server = createServer({
+		serializers:{
+			application: ActiveModelSerializer
+		},
 
-        factories: {
-            user: Factory.extend({
-                name(i: number) {
-                    return `User ${i + 1}`;
-                },
-                email() {
-                    return faker.internet.email().toLowerCase();
-                },
-                createdAt() {
-                    return faker.date.recent(10);
-                }
-            })
-        },
+		models: {
+			user: Model.extend<Partial<User>>({})
+		},
 
-        seeds(server) {
-            server.createList('user', 200);
-        },
+		factories: {
+			user: Factory.extend({
+				name(i: number) {
+					return `User ${i + 1}`;
+				},
+				email() {
+					return faker.internet.email().toLowerCase();
+				},
+				createdAt() {
+					return faker.date.recent(10);
+				}
+			})
+		},
 
-        routes() {
-            this.namespace = 'api';
-            this.timing = 750;
+		seeds(server) {
+			server.createList("user", 200);
+		},
 
-            this.get('/users', function (schema, request) {
-                const { page = 1, per_page = 10 } = request.queryParams;
-                const total = schema.all('user').length;
+		routes() {
+			this.namespace = "api";
+			this.timing = 750;
 
-                const pageStart = (Number(page) - 1) * Number(per_page);
-                const pageEnd = pageStart + Number(per_page);
+			this.get("/users", function (schema, request) {
+				const { page = 1, per_page = 10 } = request.queryParams;
+				const total = schema.all("user").length;
 
-                const users = this.serialize(schema.all('user')).users.slice(pageStart, pageEnd);
+				const pageStart = (Number(page) - 1) * Number(per_page);
+				const pageEnd = pageStart + Number(per_page);
 
-                return new Response(
-                    200,
-                    { 'x-total-count': String(total) },
-                    { users }
-                );
-            });
+				const users = this.serialize(schema.all("user")).users.slice(pageStart, pageEnd);
 
-            this.post('/users');
+				return new Response(
+					200,
+					{ "x-total-count": String(total) },
+					{ users }
+				);
+			});
 
-            this.namespace = '';
-            this.passthrough();
-        }
+			this.post("/users");
 
-    })
+			this.namespace = "";
+			this.passthrough();
+		}
 
-    return server;
+	});
+
+	return server;
 }

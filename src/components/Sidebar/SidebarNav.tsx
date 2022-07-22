@@ -9,17 +9,17 @@ import { NavSection } from "./NavSection";
 export function SidebarNav() {
 
 
-    return (
-        <Stack spacing="12" align="flex-start">
-            <NavSection title="GERAL">
-                <NavLink href="/dashboard" icon={RiDashboardLine}>Dashboard</NavLink>
-                <NavLink href="/users" icon={RiContactsBookLine}>Usuários</NavLink>
-            </NavSection>
+	return (
+		<Stack spacing="12" align="flex-start">
+			<NavSection title="GERAL">
+				<NavLink href="/dashboard" icon={RiDashboardLine}>Dashboard</NavLink>
+				<NavLink href="/users" icon={RiContactsBookLine}>Usuários</NavLink>
+			</NavSection>
 
-            <NavSection title="AUTOMAÇÃO">
-                <NavLink href="/forms" icon={RiInputMethodLine}>Formulários</NavLink>
-                <NavLink href="/automation" icon={RiGitMergeLine}>Automação</NavLink>
-            </NavSection>
-        </Stack>
-    )
+			<NavSection title="AUTOMAÇÃO">
+				<NavLink href="/forms" icon={RiInputMethodLine}>Formulários</NavLink>
+				<NavLink href="/automation" icon={RiGitMergeLine}>Automação</NavLink>
+			</NavSection>
+		</Stack>
+	);
 }
